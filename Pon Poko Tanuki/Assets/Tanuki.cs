@@ -49,6 +49,11 @@ public class Tanuki : MonoBehaviour
         }
 
 
+
+        if (Input.GetKeyDown("c")) 
+        {
+
+        }
     }
 
     void OnCollisionEnter2D(Collision2D other)
