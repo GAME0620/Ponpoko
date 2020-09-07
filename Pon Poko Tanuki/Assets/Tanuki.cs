@@ -8,6 +8,8 @@ public class Tanuki : MonoBehaviour
     public float flap = 800f;
     public float scroll = 5f;
     float direction = 0f;
+    float Slide = 30f;  //横移動の力の強さ
+    float flaps = 800f;  //ジャンプ時の力の大きさ
     Rigidbody2D rb2d;
     bool jump = false;
 
@@ -22,19 +24,16 @@ public class Tanuki : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //キーボード操作
+       // キーボード操作
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            direction = 1f;
+            //左入力時
+            rb2d.AddForce(Vector2.right * Slide);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
-            direction = -1f;
-        }
-        else
-        {
-            direction = 0f;
+            //右入力時
+            rb2d.AddForce(Vector2.left * Slide);
         }
 
 
@@ -44,23 +43,25 @@ public class Tanuki : MonoBehaviour
         //ジャンプ判定
         if (Input.GetKeyDown("space") && !jump)
         {
-            rb2d.AddForce(Vector2.up * flap);
+            //ジャンプ時
+            rb2d.AddForce(Vector2.up * flaps);
             jump = true;
         }
-
-
 
         if (Input.GetKeyDown("c")) 
         {
 
         }
+        
     }
-
+    //設置判定があればジャンプ判定をfalseへ変更
+    
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ground"))
         {
             jump = false;
         }
+        jump = false;
     }
 }
